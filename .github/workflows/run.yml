@@ -1,0 +1,15 @@
+name: runner
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "5 */6 * * *"
+jobs:
+  work:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y tmux curl
+          bash scripts/task.sh
